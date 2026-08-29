@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: robolab
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_PATH
+        value: database/robolab.db
+      - key: ALLOWED_ORIGINS
+        value: https://YOUR-RENDER-DOMAIN.onrender.com
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        value: https://YOUR-RENDER-DOMAIN.onrender.com/api/auth/google/callback
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4.1-mini
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_MONTHLY_PRICE_ID
+        sync: false
+      - key: STRIPE_ANNUAL_PRICE_ID
+        sync: false
+      - key: STRIPE_SUCCESS_URL
+        value: https://YOUR-RENDER-DOMAIN.onrender.com/?payment=success
+      - key: STRIPE_CANCEL_URL
+        value: https://YOUR-RENDER-DOMAIN.onrender.com/?payment=cancelled
